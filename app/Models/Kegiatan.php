@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\StatusKegiatan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,6 +26,7 @@ class Kegiatan extends Model
     protected $casts = [
         'tanggal_mulai' => 'datetime',
         'tanggal_selesai' => 'datetime',
+        'status' => StatusKegiatan::class,
     ];
 
     
