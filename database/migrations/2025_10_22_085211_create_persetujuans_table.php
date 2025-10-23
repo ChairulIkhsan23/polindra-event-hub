@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('kegiatan_id')->constrained('kegiatans')->onDelete('cascade');
             $table->foreignId('dosen_id')->constrained('users')->onDelete('cascade');
-            $table->enum('status', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu');
+            $table->enum('status', ['menunggu_persetujuan', 'disetujui', 'ditolak', 'selesai'])->default('menunggu_persetujuan');
             $table->text('catatan')->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->string('ip_address')->nullable();

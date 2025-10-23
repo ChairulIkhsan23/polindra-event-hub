@@ -2,18 +2,14 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Ormawa;
 
 class OrmawaSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-                $ormawas = [
+        $ormawas = [
             [
                 'nama_ormawa' => 'BEM Polindra',
                 'jenis' => 'Organisasi Mahasiswa',
@@ -47,7 +43,10 @@ class OrmawaSeeder extends Seeder
         ];
 
         foreach ($ormawas as $ormawa) {
-            Ormawa::create($ormawa);
+            Ormawa::create(array_merge($ormawa, [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]));
         }
     }
 }

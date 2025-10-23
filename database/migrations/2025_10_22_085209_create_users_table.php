@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('nidn')->unique()->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
-            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
             $table->foreignId('ormawa_id')->nullable()->constrained('ormawas')->onDelete('set null');
             $table->string('foto')->nullable();
             $table->rememberToken();

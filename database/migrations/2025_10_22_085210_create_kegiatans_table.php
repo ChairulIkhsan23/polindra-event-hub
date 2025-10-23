@@ -20,7 +20,7 @@ return new class extends Migration
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_selesai');
             $table->integer('kapasitas')->default(0);
-            $table->enum('status', ['draft', 'menunggu', 'disetujui', 'ditolak', 'selesai'])->default('draft');
+            $table->enum('status', ['draft', 'menunggu_persetujuan', 'disetujui', 'ditolak', 'selesai'])->default('draft');
             $table->foreignId('staff_id')->constrained('users')->onDelete('cascade');
             $table->string('lampiran')->nullable();
             $table->timestamps();

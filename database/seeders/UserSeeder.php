@@ -4,106 +4,105 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Role;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Ambil role IDs
-        $adminRole = Role::where('nama', 'Administrator')->first();
-        $staffRole = Role::where('nama', 'Staff')->first();
-        $dosenRole = Role::where('nama', 'Dosen')->first();
-        $mahasiswaRole = Role::where('nama', 'Mahasiswa')->first();
+        // Ambil role berdasarkan nama (harus sudah dibuat di RoleSeeder)
+        $adminRole = Role::where('name', 'admin')->first();
+        $staffRole = Role::where('name', 'staff')->first();
+        $dosenRole = Role::where('name', 'dosen')->first();
+        $mahasiswaRole = Role::where('name', 'mahasiswa')->first();
 
-        // User Administrator
-        User::create([
+        // --- ADMIN ---
+        $admin = User::create([
             'nama' => 'Admin Polindra',
             'email' => 'admin@polindra.ac.id',
             'password' => Hash::make('admin123'),
-            'role_id' => $adminRole->id,
             'email_verified_at' => now(),
         ]);
+        $admin->assignRole($adminRole);
 
-        // User Staff
-        User::create([
+        // --- STAFF ---
+        $staff1 = User::create([
             'nama' => 'Budi Santoso',
             'email' => 'staff@polindra.ac.id',
             'nidn' => '0412345678',
             'password' => Hash::make('staff123'),
-            'role_id' => $staffRole->id,
-            'ormawa_id' => 1, // BEM Polindra
+            'ormawa_id' => 1,
             'email_verified_at' => now(),
         ]);
+        $staff1->assignRole($staffRole);
 
-        User::create([
+        $staff2 = User::create([
             'nama' => 'Siti Nurhaliza',
             'email' => 'staff2@polindra.ac.id',
             'nidn' => '0412345679',
             'password' => Hash::make('staff123'),
-            'role_id' => $staffRole->id,
-            'ormawa_id' => 2, // HIMA TI
+            'ormawa_id' => 2,
             'email_verified_at' => now(),
         ]);
+        $staff2->assignRole($staffRole);
 
-        // User Dosen
-        User::create([
+        // --- DOSEN ---
+        $dosen1 = User::create([
             'nama' => 'Dr. Ahmad Fauzi, M.Kom',
             'email' => 'dosen@polindra.ac.id',
             'nidn' => '0401018901',
             'password' => Hash::make('dosen123'),
-            'role_id' => $dosenRole->id,
             'email_verified_at' => now(),
         ]);
+        $dosen1->assignRole($dosenRole);
 
-        User::create([
+        $dosen2 = User::create([
             'nama' => 'Ir. Dewi Lestari, M.T',
             'email' => 'dosen2@polindra.ac.id',
             'nidn' => '0402019002',
             'password' => Hash::make('dosen123'),
-            'role_id' => $dosenRole->id,
             'email_verified_at' => now(),
         ]);
+        $dosen2->assignRole($dosenRole);
 
-        // User Mahasiswa
-        User::create([
+        // --- MAHASISWA ---
+        $m1 = User::create([
             'nama' => 'Charul Ikhsan',
             'email' => 'charul@student.polindra.ac.id',
             'nim' => '2307062',
             'password' => Hash::make('mahasiswa123'),
-            'role_id' => $mahasiswaRole->id,
             'email_verified_at' => now(),
         ]);
+        $m1->assignRole($mahasiswaRole);
 
-        User::create([
+        $m2 = User::create([
             'nama' => 'Dinda Ayu Rachmawati',
             'email' => 'dinda@student.polindra.ac.id',
             'nim' => '2307064',
             'password' => Hash::make('mahasiswa123'),
-            'role_id' => $mahasiswaRole->id,
             'email_verified_at' => now(),
         ]);
+        $m2->assignRole($mahasiswaRole);
 
-        User::create([
+        $m3 = User::create([
             'nama' => 'Intan Nurul Aini',
             'email' => 'intan@student.polindra.ac.id',
             'nim' => '2307069',
             'password' => Hash::make('mahasiswa123'),
-            'role_id' => $mahasiswaRole->id,
             'email_verified_at' => now(),
         ]);
+        $m3->assignRole($mahasiswaRole);
 
-        // Tambah beberapa mahasiswa lagi untuk testing
+        // Mahasiswa tambahan
         for ($i = 1; $i <= 5; $i++) {
             User::create([
                 'nama' => "Mahasiswa Test {$i}",
                 'email' => "mahasiswa{$i}@student.polindra.ac.id",
-                'nim' => '230700' . ($i + 70),
+                'nim' => fake()->unique()->numerify('2307###'),
                 'password' => Hash::make('mahasiswa123'),
-                'role_id' => $mahasiswaRole->id,
                 'email_verified_at' => now(),
-            ]);
+            ])->assignRole($mahasiswaRole);
         }
     }
 }

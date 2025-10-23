@@ -2,38 +2,18 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class RoleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $roles = [
-            [
-                'nama' => 'Administrator',
-                'deskripsi' => 'Pengelola penuh sistem, dapat mengelola semua data dan pengguna',
-            ],
-            [
-                'nama' => 'Staff',
-                'deskripsi' => 'Staff kegiatan/panitia yang dapat membuat dan mengelola kegiatan',
-            ],
-            [
-                'nama' => 'Dosen',
-                'deskripsi' => 'Dosen penanggung jawab yang menyetujui kegiatan',
-            ],
-            [
-                'nama' => 'Mahasiswa',
-                'deskripsi' => 'Mahasiswa yang dapat mendaftar kegiatan',
-            ],
-        ];
-
-        foreach ($roles as $role) {
-            Role::create($role);
-        }
+        DB::table('roles')->insert([
+            ['name' => 'Administrator', 'guard_name' => 'web', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Staff',         'guard_name' => 'web', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Dosen',         'guard_name' => 'web', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Mahasiswa',     'guard_name' => 'web', 'created_at' => now(), 'updated_at' => now()],
+        ]);
     }
 }

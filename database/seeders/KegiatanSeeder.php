@@ -45,7 +45,7 @@ class KegiatanSeeder extends Seeder
                 'tanggal_mulai' => Carbon::now()->addDays(21)->setTime(13, 0),
                 'tanggal_selesai' => Carbon::now()->addDays(21)->setTime(17, 0),
                 'kapasitas' => 30,
-                'status' => 'menunggu',
+                'status' => 'menunggu_persetujuan',
                 'staff_id' => $staffId,
             ],
             [
